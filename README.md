@@ -39,3 +39,13 @@ nomad run -address="http://{SERVER_IP}:4646" ./jobs/polymath-simplewebapp.nomad
 ```
 
 Note: It's still a bit buggy. I need to improve the server configurations and figure out how to expose an app port.
+
+Currently it's running at this addess `18.203.178.178`:
+ * Nomad: http://18.203.178.178:4646/ui/
+ * Consul: http://18.203.178.178:8500/ui
+
+Example commands:
+```sh
+nomad server members -address="http://18.203.178.178:4646"
+nomad run -address="http://18.203.178.178:4646" ./jobs/polymath-simplewebapp.nomad
+```
