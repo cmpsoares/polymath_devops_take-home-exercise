@@ -24,6 +24,16 @@ provider "aws" {
 module "nomad" {
   source       = "hashicorp/nomad/aws"
   version      = "0.10.0"
-  ami_id       = "ami-04fcff3bed161226f"
+  ami_id       = "ami-0f280560b98fea7f0"
   cluster_name = "polymath-THA-nomad-cluster"
+}
+
+resource "aws_security_group_rule" "allow_http_inbound" {
+  type        = "ingress"
+  from_port   = 8080
+  to_port     = 8080
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = module.nomad.security_group_id_clients
 }
