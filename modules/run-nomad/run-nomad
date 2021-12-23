@@ -2,6 +2,7 @@
 # This script is used to configure and run Nomad on an AWS server.
 
 set -e
+set -x
 
 readonly NOMAD_CONFIG_FILE="default.hcl"
 readonly SYSTEMD_CONFIG_PATH="/etc/systemd/system/nomad.service"
@@ -219,7 +220,7 @@ EOF
 [Service]
 User=$nomad_user
 Group=$nomad_user
-ExecStart=$nomad_bin_dir/nomad agent -config $nomad_config_dir -data-dir $nomad_data_dir
+ExecStart=$nomad_bin_dir/nomad agent -dev-connect -config $nomad_config_dir -data-dir $nomad_data_dir
 ExecReload=/bin/kill --signal HUP \$MAINPID
 KillMode=process
 Restart=on-failure
